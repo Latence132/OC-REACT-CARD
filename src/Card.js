@@ -1,10 +1,28 @@
-import React from "react";
+import React from 'react'
+import PropTypes from 'prop-types'
 
-const Card = ({ card, feedback }) => (
-    <div className={`card ${feedback}`} onClick={() => console.log(card, 'clicked')}>
+
+
+const HIDDEN_SYMBOL = '❓'
+
+const Card = ({ card, feedback, index, onClick }) => (
+    <div className={`card ${feedback}  four wide   aligned `} onClick={() => onClick(index)}>
         <span className="symbol">
-            {feedback === 'hidden' ? '🎴' : card}
+            {feedback === 'hidden' ? HIDDEN_SYMBOL : card}
         </span>
     </div>
 )
+
+Card.propTypes = {
+    card: PropTypes.string.isRequired,
+    feedback: PropTypes.oneOf([
+        'hidden',
+        'justMatched',
+        'justMismatched',
+        'visible',
+    ]).isRequired,
+    index: PropTypes.number.isRequired,
+    onClick: PropTypes.func.isRequired,
+}
+
 export default Card
